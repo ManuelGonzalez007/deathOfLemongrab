@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+        <title>Death of Lemongrab</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    </head>
+
+    <body>
+
+    	<style>
+
+    		body {
+                text-align: center;
+                background-color: black;
+                color: red;
+                font-size: 20px;
+            }
+
+            #widthPermanent {
+            	min-height: 460px;
+            }
+
+
+            button:hover {
+            	cursor: pointer;
+            }
+
+         
+
+		</style>
+
+    	
+        <div id="widthPermanent">
+        	<img id = "lemon" src="lemongrab.png" style ="width: 300px" alt="Image of Lemongrab">
+    	</div>
+
+        <h1> My life will end in
+        	<span id="countdown">15</span>
+        	seconds.
+        </h1>
+
+        <audio id="myAudio">
+        	<source src="audio.mp3" type="audio/mpeg">
+        </audio>
+
+		<button id="playButton" onclick="playAudio()" type="button"><i style="font-size:10px" class="fa">&#xf04b;</i></button>
+		<button onclick="stopAudio()" type="button"><i style="font-size:10px" class="fa">&#xf04d;</i></button> 
+		
+	
+		<script>
+  
+			var number = document.getElementById("countdown");
+
+			var countItDown = function() {
+				var currentTime = parseFloat(countdown.textContent);
+				if (currentTime > 0) {
+					number.textContent = currentTime - 1;
+				} else {
+					window.clearInterval(timer);
+				}
+			};
+  
+    		var timer = window.setInterval(countItDown, 1000);
+ 			
+
+ 			var lemongrab = document.getElementById("lemon");
+		  
+			var small = function() {
+				var imageWidth = lemongrab.style.width;
+				var newWidth = parseFloat(imageWidth) - 0.3;
+        		lemongrab.style.width = newWidth + "px"; 
+				var animation = window.requestAnimationFrame(small);
+				if(parseFloat(lemongrab.style.width) < 1) {
+					playButton.onclick = finalMessage;
+					window.cancelAnimationFrame(animation);
+				}
+			}
+			small();
+
+   			var x = document.getElementById("myAudio"); 
+
+			function playAudio() { 
+				if(x.paused) {
+					x.play()
+					playButton.innerHTML = "<i style='font-size:10px' class='fa'>&#xf04c;</i>"
+				} else {
+			    	x.pause()
+			    	playButton.innerHTML = "<i style='font-size:10px' class='fa'>&#xf04b;</i>"
+			    }
+			}; 
+		
+			function stopAudio() { 
+			  x.pause();
+			  x.currentTime = 0;
+			  playButton.innerHTML = "<i style='font-size:10px' class='fa'>&#xf04b;</i>" 
+			}; 
+
+			x.onended = function() {
+				playButton.innerHTML = "<i style='font-size:10px' class='fa'>&#xf04b;</i>"
+			};
+
+			function finalMessage(event) {
+				alert("Lemongrab is dead");
+			}
+
+
+
+		</script>
+
+	</body>
+	
+</html>
+
+
